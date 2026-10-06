@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도전! 해썹(HACCP) 마트 & 조리 과학 마스터 - 고등학교 기술·가정</title>
+    <meta name="description" content="고등학교 기술·가정 III. 건강한 식생활과 조리 과학 - 해썹(HACCP) 마트 식재료 감별, 물리적/화학적 조리 과학 원리, 3대 실습 요리 및 주방 안전 인터랙티브 에듀게임">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="game-header">
+        <div class="header-container">
+            <div class="brand-section">
+                <div class="brand-icon">🛒</div>
+                <div class="brand-titles">
+                    <h1>해썹(HACCP) 마트 & 조리 과학 마스터 <span class="brand-badge">고등 기술·가정</span></h1>
+                    <p>III. 건강한 식생활과 조리 과학 &gt; 식재료 선택 &amp; 조리 과학 원리</p>
+                </div>
+            </div>
+            <div class="header-controls">
+                <button class="header-btn cheat-sheet-btn" id="btnCheatSheet" title="수업 전/후 핵심 개념 요약">
+                    <span>📋</span> <span>수업 요약</span>
+                </button>
+                <button class="header-btn sound-toggle-btn" id="btnSoundToggle" title="효과음 켜기/끄기">
+                    <span id="soundIcon">🔊</span>
+                </button>
+                <div class="score-badge">
+                    <span>⭐</span>
+                    <span id="scoreDisplay">0점</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 진행 상황 프로그레스 바 (7단계 확장) -->
+    <section class="progress-section" id="progressSection" style="display: none;">
+        <div class="progress-track">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+        <div class="stage-indicators">
+            <div class="stage-step" id="indicator-1"><span>1️⃣</span> <span>해썹 마트</span></div>
+            <div class="stage-step" id="indicator-2"><span>2️⃣</span> <span>신선도 감별</span></div>
+            <div class="stage-step" id="indicator-3"><span>3️⃣</span> <span>인증 마크</span></div>
+            <div class="stage-step" id="indicator-4"><span>4️⃣</span> <span>셰프의 정육점</span></div>
+            <div class="stage-step" id="indicator-5"><span>5️⃣</span> <span>조리과학 랩</span></div>
+            <div class="stage-step" id="indicator-6"><span>6️⃣</span> <span>3대 요리실습</span></div>
+            <div class="stage-step" id="indicator-7"><span>7️⃣</span> <span>안전 골든벨</span></div>
+        </div>
+    </section>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-content">
+
+        <!-- [VIEW 0] 인트로 화면 -->
+        <section class="stage-view active" id="view-intro">
+            <div class="intro-card">
+                <div class="intro-hero-icon">🔬🍳</div>
+                <h2 class="intro-title">오늘의 미션 : <span>조리 과학 마스터</span>가 되어라!</h2>
+                <p class="intro-desc">
+                    <strong>해썹(HACCP) 마트</strong>의 헷갈리는 함정 라벨과 유통기한을 뚫고 안전한 식재료를 장바구니에 담아보세요!<br>
+                    <strong>조리 과정의 과학적 원리(물리적·화학적 변화)</strong>와 <strong>3대 교과서 실습(수제비, 갈비찜, 생선전)</strong>을 완벽히 마스터하고,<br>
+                    주방 안전 골든벨을 통과하여 <strong>1급 조리 과학 마스터 자격증</strong>을 획득해 보세요.
+                </p>
+
+                <div class="curriculum-tags">
+                    <span class="c-tag">#해썹_HACCP_마트</span>
+                    <span class="c-tag">#GAP_유기농_무농약_무항생제</span>
+                    <span class="c-tag">#물리적변화_vs_화학적변화</span>
+                    <span class="c-tag">#수제비_글루텐형성</span>
+                    <span class="c-tag">#갈비찜_연육효소_모서리깎기</span>
+                    <span class="c-tag">#생선전_달걀결합성_응고성</span>
+                    <span class="c-tag">#기름화재_뚜껑덮기</span>
+                </div>
+
+                <div class="student-input-box">
+                    <label for="studentNameInput">학생 이름(학번):</label>
+                    <input type="text" id="studentNameInput" placeholder="예: 20101 홍길동" maxlength="15" value="조리과학도">
+                </div>
+
+                <button class="btn-start-game" id="btnStartGame">
+                    <span>해썹 마트 카트 끌고 출발!</span>
+                    <span>🛒 &rarr;</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- [VIEW 1] Stage 1: 해썹(HACCP) 마트 식품 안전 장보기 순서 & 함정 라벨 -->
+        <section class="stage-view" id="view-stage1">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 1</span>
+                        <div>
+                            <h2 class="stage-main-title">해썹(HACCP) 마트 털기: 식품 안전 장보기 순서</h2>
+                            <p class="stage-instruction">식중독을 예방하는 5단계 순서대로 정품 상품을 카트에 담으세요! (⚠️변질·팽창·가짜 함정 상품 주의!)</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>⏳ 장보기: </span>
+                        <span id="stage1Counter">순서 1 / 5</span>
+                    </div>
+                </div>
+
+                <div class="order-workflow">
+                    <div class="current-target-card">
+                        <div class="target-info">
+                            <h3 id="targetCategoryName">현재 담아야 할 단계: 실온 보관 제품</h3>
+                            <p id="targetCategoryDesc">온도 변화에 영향이 적은 쌀, 통조림, 라면 등 실온 보관 식품부터 담아요!</p>
+                        </div>
+                        <div class="order-steps-indicator" id="orderPillsContainer">
+                            <!-- JS에서 5단계 뱃지 생성 -->
+                        </div>
+                    </div>
+
+                    <div class="items-shelf-grid" id="shelfItemsGrid">
+                        <!-- 진열대 아이템들 -->
+                    </div>
+
+                    <div class="cart-box-container">
+                        <div class="cart-header">
+                            <span>🛒 내 쇼핑 카트 (식품 안전 순서대로 차곡차곡)</span>
+                            <span id="cartCount">담은 상품: 0개</span>
+                        </div>
+                        <div class="cart-items-row" id="cartItemsRow">
+                            <!-- 카트 아이템들 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 2] Stage 2: 신선 식재료 감별 탐정소 -->
+        <section class="stage-view" id="view-stage2">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 2</span>
+                        <div>
+                            <h2 class="stage-main-title">신선 식재료 감별 탐정소</h2>
+                            <p class="stage-instruction">교과서 기준에 부합하는 가장 신선하고 올바른 상태의 식재료를 찾아 선택하세요!</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🔍 감별 문제: </span>
+                        <span id="stage2Progress">1 / 6</span>
+                    </div>
+                </div>
+
+                <div class="inspector-layout">
+                    <div class="inspector-scenario-banner">
+                        <div class="scenario-food-title" id="inspectorFoodTitle">🐟 생선 고르기</div>
+                        <div class="scenario-question" id="inspectorQuestion">생선을 구입할 때 가장 신선한 상태를 판별하는 방법으로 옳은 것은?</div>
+                    </div>
+
+                    <div class="inspector-options-container" id="inspectorOptionsContainer">
+                        <!-- 2개의 선택 카드 렌더링 -->
+                    </div>
+
+                    <div class="inspector-tip-box" id="inspectorTipBox">
+                        <span>💡 <strong>교과서 팁:</strong></span>
+                        <span id="inspectorTipText">생선은 또렷한 눈과 잘 밀착된 비늘을 확인해요!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 3] Stage 3: 친환경·안전 인증 마크 스피드 매칭 -->
+        <section class="stage-view" id="view-stage3">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 3</span>
+                        <div>
+                            <h2 class="stage-main-title">친환경·안전 인증 마크 스피드 매칭</h2>
+                            <p class="stage-instruction">제시된 설명에 딱 들어맞는 국가 공인 인증 마크를 골라주세요! (⚠️가짜 유사 마크 주의)</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🏷️ 인증 퀴즈: </span>
+                        <span id="stage3Progress">1 / 6</span>
+                    </div>
+                </div>
+
+                <div class="cert-game-layout">
+                    <div class="cert-quiz-card">
+                        <span class="cert-quiz-tag">이 설명에 해당하는 인증 마크는?</span>
+                        <div class="cert-clue-text" id="certQuizClue">위해요소 중점관리 안전관리인증기준 마크는?</div>
+                    </div>
+
+                    <div class="cert-badges-grid" id="certBadgesGrid">
+                        <!-- 인증 마크 선택 버튼들 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 4] Stage 4: 셰프의 정육점 (부위별 명칭과 용도) -->
+        <section class="stage-view" id="view-stage4">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 4</span>
+                        <div>
+                            <h2 class="stage-main-title">셰프의 정육점: 요리별 딱 맞는 부위 찾기</h2>
+                            <p class="stage-instruction">셰프님이 주문한 요리에 가장 알맞은 육류 부위를 다이어그램이나 부위 목록에서 클릭하세요!</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🥩 주문: </span>
+                        <span id="stage4Progress">1 / 6</span>
+                    </div>
+                </div>
+
+                <div class="butcher-layout">
+                    <div class="chef-order-board">
+                        <div class="chef-avatar">👨‍🍳</div>
+                        <div class="order-details">
+                            <h3>셰프의 특별 주문서</h3>
+                            <div class="order-dish-title" id="chefDishTitle">겉바속촉 프리미엄 수제 돈가스</div>
+                            <div class="order-clue" id="chefOrderClue">돼지고기 부위 중 지방이 적고 살코기가 담백하여 돈가스에 쓰이는 부위는?</div>
+                        </div>
+                    </div>
+
+                    <!-- 소/돼지/닭 인터랙티브 SVG 다이어그램 컨테이너 -->
+                    <div id="meatMapContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 5] Stage 5: 조리 과학 랩 (물리적 변화 vs 화학적 변화 스피드 분류) -->
+        <section class="stage-view" id="view-stage5">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 5</span>
+                        <div>
+                            <h2 class="stage-main-title">조리 과학 랩: 물리적 변화 vs 화학적 변화</h2>
+                            <p class="stage-instruction">조리 과정의 현상 카드를 보고 물질 고유 성질이 유지되는 '물리적 변화'인지, 성분이 변하는 '화학적 변화'인지 분류하세요!</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🧪 과학 랩: </span>
+                        <span id="stage5LabProgress">1 / 10</span>
+                    </div>
+                </div>
+
+                <div class="science-lab-layout">
+                    <div class="science-card-arena" id="labCardContainer">
+                        <!-- JS 렌더링: 조리 현상 카드 -->
+                    </div>
+
+                    <div class="science-decision-controls">
+                        <button class="btn-lab-choice btn-physical" id="btnLabPhysical">
+                            <span class="choice-icon">🧊</span>
+                            <span class="choice-title">물리적 변화</span>
+                            <span class="choice-sub">형태/상태만 변화 (다듬기·씻기·썰기·팽윤·탈수·호화·해동)</span>
+                        </button>
+                        <button class="btn-lab-choice btn-chemical" id="btnLabChemical">
+                            <span class="choice-icon">🧪</span>
+                            <span class="choice-title">화학적 변화</span>
+                            <span class="choice-sub">새로운 성분 생성 (갈변 산화·발효·단백질 응고·콜라겐 분해)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 6] Stage 6: 3대 교과서 실습 요리 & 과학 원리 시뮬레이터 -->
+        <section class="stage-view" id="view-stage6">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 6</span>
+                        <div>
+                            <h2 class="stage-main-title">3대 교과서 실습 요리 과학 시뮬레이터</h2>
+                            <p class="stage-instruction">수제비(글루텐), 소갈비찜(연육·모서리깎기), 생선전(달걀결합성·응고성)의 조리 과학을 직접 적용해 요리를 완성하세요!</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🍳 요리 실습: </span>
+                        <span id="stage6Progress">요리 1/3 (단계 1/3)</span>
+                    </div>
+                </div>
+
+                <div class="cooking-simulator-layout">
+                    <div class="dish-meta-banner">
+                        <div class="dish-title-wrap">
+                            <h2 id="dishHeaderTitle">쫄깃한 손 수제비 만들기</h2>
+                            <span class="dish-science-badge" id="dishHeaderBadge">밀가루 과학: 글루텐</span>
+                        </div>
+                        <p id="dishHeaderDesc">밀가루를 치대어 쫄깃한 그물망 구조를 형성하고 육수에 끓여내는 전통 음식!</p>
+                    </div>
+
+                    <div class="dish-step-indicators" id="dishStepIndicator">
+                        <!-- JS에서 단계 생성 -->
+                    </div>
+
+                    <div class="dish-interactive-box" id="dishInteractiveArea">
+                        <!-- 요리 단계별 인터랙션 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 7] Stage 7: 도전 골든벨 & 주방 안전 수칙 -->
+        <section class="stage-view" id="view-stage7">
+            <div class="stage-card">
+                <div class="stage-top-meta">
+                    <div class="stage-badge-wrap">
+                        <span class="stage-num-badge">STAGE 7</span>
+                        <div>
+                            <h2 class="stage-main-title">최종 도전 골든벨! 주방 안전 &amp; 조리 과학 종합</h2>
+                            <p class="stage-instruction">기름 화재 소화법, 교차오염 방지, 열전달 조리법 퀴즈를 풀고 최고 등급 자격증을 획득하세요!</p>
+                        </div>
+                    </div>
+                    <div class="timer-box">
+                        <span>🔔 골든벨: </span>
+                        <span id="stage7Progress">1 / 5</span>
+                    </div>
+                </div>
+
+                <div class="golden-bell-layout">
+                    <div class="golden-bell-header">
+                        <span class="bell-badge">주방 안전 &amp; 조리 과학 최종 평가</span>
+                        <div class="golden-question-text" id="goldenQuestionText">문제가 여기에 표시됩니다.</div>
+                    </div>
+
+                    <div class="golden-choices-grid" id="goldenChoicesGrid">
+                        <!-- 4지선다 버튼들 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [VIEW 8] 결과 영수증 성적표 & 1급 조리 과학 마스터 자격증 -->
+        <section class="stage-view" id="view-receipt">
+            <div class="receipt-wrapper">
+                
+                <!-- 1. 공식 자격증 카드 -->
+                <div class="certificate-card" id="certificateCard">
+                    <div class="cert-border-inner">
+                        <div class="cert-header-icon">🏆</div>
+                        <h2 class="cert-main-title">1급 조리 과학 마스터 자격증</h2>
+                        <p class="cert-sub-text">고등학교 기술·가정 식생활과 조리 과학 과정 수료 증서</p>
+                        
+                        <div class="cert-body-content">
+                            <p class="cert-statement">
+                                위 사람(<strong id="certStudentName">홍길동</strong>)은 고등학교 기술·가정<br>
+                                <strong>「III. 건강한 식생활과 조리 과학」</strong> 교육과정을 우수하게 이수하고,<br>
+                                해썹(HACCP) 마트 식재료 감별 및 조리 과정의 과학적 원리를 완벽히 체득하였으므로<br>
+                                본 <strong>1급 조리 과학 마스터 자격증</strong>을 수여합니다.
+                            </p>
+                        </div>
+
+                        <div class="cert-badges-row">
+                            <span class="cert-pill">✓ 해썹(HACCP) 안전 감별</span>
+                            <span class="cert-pill">✓ 조리 물리·화학 과학</span>
+                            <span class="cert-pill">✓ 글루텐·연육·결합성 마스터</span>
+                            <span class="cert-pill">✓ 주방 안전 수칙 준수</span>
+                        </div>
+
+                        <div class="cert-seal-box">
+                            <div class="gold-seal">
+                                <span class="seal-star">★</span>
+                                <span class="seal-text">공식 인증</span>
+                                <span class="seal-year">2026</span>
+                            </div>
+                            <div class="cert-score-chip" id="certScoreBadge">최종 획득: 980점 (S등급)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 스마트 마트 영수증 카드 -->
+                <div class="receipt-card" id="receiptCard">
+                    <div class="receipt-grade-seal">
+                        <span class="seal-title">조리 과학</span>
+                        <span class="seal-rank" id="receiptRankTitle">특급 마스터</span>
+                    </div>
+
+                    <div class="receipt-top-header">
+                        <h2>🛒 해썹(HACCP) 스마트 마트 영수증</h2>
+                        <p>고등학교 기술·가정 식재료 &amp; 조리 과학 종합 성적표</p>
+                        <div class="receipt-meta-row">
+                            <span id="receiptDate">2026-10-06 09:30</span>
+                            <span id="receiptCustomer">쇼퍼: 홍길동</span>
+                        </div>
+                    </div>
+
+                    <table class="receipt-table">
+                        <thead>
+                            <tr>
+                                <th>미션 코스</th>
+                                <th style="text-align: right;">결과</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Stage 1: 해썹 마트 안전 장보기</td>
+                                <td style="text-align: right;" id="resStage1">완료 (100점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 2: 신선 식재료 감별</td>
+                                <td style="text-align: right;" id="resStage2">완료 (120점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 3: 친환경·안전 인증마크</td>
+                                <td style="text-align: right;" id="resStage3">완료 (120점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 4: 셰프의 정육점 부위 매칭</td>
+                                <td style="text-align: right;" id="resStage4">완료 (120점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 5: 조리 과학 랩 (물리/화학)</td>
+                                <td style="text-align: right;" id="resStage5">완료 (250점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 6: 3대 교과서 실습 요리</td>
+                                <td style="text-align: right;" id="resStage6">완료 (360점)</td>
+                            </tr>
+                            <tr>
+                                <td>Stage 7: 주방 안전 &amp; 골든벨</td>
+                                <td style="text-align: right;" id="resStage7">완료 (150점)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="receipt-total-row">
+                        <span class="receipt-total-title">최종 취득 총점</span>
+                        <span class="receipt-total-score" id="receiptTotalScore">1,220점</span>
+                    </div>
+
+                    <div class="receipt-barcode-box">
+                        <div class="barcode-lines"></div>
+                        <div class="barcode-number">★ HACCP-COOKING-SCIENCE-MASTER-PASS ★</div>
+                    </div>
+                </div>
+
+                <div class="receipt-actions">
+                    <button class="btn-restart" id="btnRestartGame">🔄 다시 도전하기</button>
+                    <button class="btn-print" id="btnPrintReceipt">🖨️ 자격증 &amp; 영수증 인쇄/저장 (PDF)</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 공통 정답/오답 해설 피드백 모달 -->
+    <div class="feedback-modal-overlay" id="feedbackModal">
+        <div class="feedback-card">
+            <div class="feedback-icon" id="feedbackIcon">🎉</div>
+            <h3 class="feedback-title correct" id="feedbackTitle">정답입니다!</h3>
+            <div class="feedback-desc" id="feedbackDesc">
+                과학적 원리 해설이 여기에 표시됩니다.
+            </div>
+            <button class="feedback-next-btn" id="feedbackNextBtn">다음으로 진행 &rarr;</button>
+        </div>
+    </div>
+
+    <!-- 교사용 3분 요약 치트시트 모달 -->
+    <div class="cheat-sheet-modal" id="cheatSheetModal">
+        <div class="cheat-sheet-content">
+            <button class="cheat-close-btn" id="btnCloseCheat">✕</button>
+            <div class="cheat-header">
+                <h2>📋 교사용 단원 핵심 요약 치트시트</h2>
+                <p>III. 건강한 식생활과 조리 과학 &gt; 식재료 선택과 조리 과학 (100% 교과서 일치)</p>
+            </div>
+            <div class="cheat-list" id="cheatSheetList">
+                <!-- JS 렌더링 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 로드 순서: Audio -> Data -> MeatMap -> CookingScience -> Game -->
+    <script src="js/audio.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/meatMap.js"></script>
+    <script src="js/cookingScience.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
